@@ -22,9 +22,175 @@
 	@include styles.theme(styles.$g100);
 }
 
-
 // Want to use only one theme? Add the css variables directly in root
 
 // body {
 // 	@include styles.theme(styles.$white);
 // }
+
+// side nav overrides
+.cds--side-nav__header-navigation {
+	display: none;
+}
+
+$background-color-submenu-item-selected: #d0e2ff;
+$background-color-nav-item-selected: #f9f9f9;
+$color-selected: #0043ce;
+
+// [token ovverides scoped to side nav]
+cds-sidenav {
+	--cds-heading-compact-01-font-size: 0.75rem;
+	--cds-heading-compact-01-font-weight: 700;
+}
+
+// [side nav]
+.cds--side-nav {
+	z-index: 7999; // header has 8000
+	box-shadow: -1px 0px 0px 0px #e0e0e0 inset; // right border
+	padding-right: 1px; // works with box shadow
+}
+
+// [nav item]
+a.cds--side-nav__link {
+	padding-left: 24px;
+	.cds--side-nav__link-text {
+		font-size: 12px;
+	}
+	// icon spacing
+	.cds--side-nav__icon:not(.cds--side-nav__submenu-chevron) {
+		margin-inline-end: 4px;
+	}
+}
+
+// #region [nav item active]
+a.cds--side-nav__link {
+	// background
+	&.cds--side-nav__item--active {
+		background-color: $background-color-nav-item-selected;
+	}
+	// hide active marker
+	&.cds--side-nav__item--active::before {
+		display: none;
+	}
+	// color
+	&[aria-current="page"] .cds--side-nav__link-text {
+		color: $color-selected;
+		font-weight: var(--cds-heading-compact-01-font-weight);
+	}
+	// hover color
+	&:hover[aria-current="page"] .cds--side-nav__link-text {
+		color: $color-selected;
+	}
+}
+// hover background
+.cds--side-nav__item:not(.cds--side-nav__item--active)
+	> .cds--side-nav__link:hover {
+	background: $background-color-nav-item-selected;
+}
+// #endregion [nav item active]
+
+// [menu]
+.cds--side-nav__menu {
+	list-style: none;
+	margin-left: 16px;
+	margin-right: 16px;
+}
+
+// [menu item]
+.cds--side-nav__submenu {
+	padding-left: 24px;
+	//hover
+	&:hover {
+		background: $background-color-nav-item-selected;
+	}
+	// icon spacing
+	.cds--side-nav__icon:not(.cds--side-nav__submenu-chevron) {
+		margin-inline-end: 4px;
+	}
+	// expanded spacing top bottom
+	&[aria-expanded="true"] + .cds--side-nav__menu {
+		margin-top: 12px;
+		margin-bottom: 12px;
+	}
+}
+
+// [menu item active]
+.cds--side-nav__item--active {
+	// title
+	.cds--side-nav__submenu-title {
+		font-weight: var(--cds-heading-compact-01-font-weight);
+		color: $color-selected;
+	}
+	// icon fill
+	.cds--side-nav__icon:not(.cds--side-nav__submenu-chevron) > svg {
+		fill: $color-selected;
+	}
+	// hide active marker
+	.cds--side-nav__submenu::before {
+		display: none;
+	}
+	// background
+	.cds--side-nav__submenu,
+	.cds--side-nav__submenu[aria-expanded="false"] {
+		background-color: $background-color-nav-item-selected;
+	}
+	// hover
+	.cds--side-nav__submenu:hover {
+		background-color: $background-color-nav-item-selected;
+	}
+}
+
+// [submenu item]
+.cds--side-nav__item.cds--side-nav__item--icon {
+	a.cds--side-nav__link {
+		border-radius: 8px;
+		padding-left: 24px;
+		margin: 4px 0;
+	}
+	.cds--side-nav__link-text {
+		font-size: 14px;
+	}
+}
+
+// [submenu item active]
+.cds--side-nav__menu {
+	a.cds--side-nav__link[aria-current="page"] {
+		background-color: $background-color-submenu-item-selected;
+	}
+
+	// typography
+	a.cds--side-nav__link[aria-current="page"] > .cds--side-nav__link-text {
+		font-weight: 400;
+	}
+	// hover color
+	a.cds--side-nav__link:hover[aria-current="page"] .cds--side-nav__link-text {
+		color: initial;
+	}
+	// hover background color
+	a.cds--side-nav__link:not(.cds--side-nav__link--current):not(
+			[aria-current="page"]
+		):hover {
+		background-color: $background-color-submenu-item-selected;
+	}
+}
+
+.cds--side-nav__header {
+	display: block;
+	color: #a8a8a8;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 20px;
+	padding-left: 24px;
+	margin-bottom: 12px;
+}
+
+.cds--side-nav-divider {
+	display: block;
+	margin-left: 12px;
+	margin-right: 12px;
+	margin-top: 12px;
+	margin-bottom: 12px;
+	box-shadow: 0px -1px 0px 0px #e0e0e0 inset;
+	height: 1px;
+}

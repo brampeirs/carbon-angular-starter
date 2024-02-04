@@ -1,0 +1,18 @@
+<div >
+    <cds-sidenav>
+        <cds-sidenav-item [route]="['/']" [active]="currentRoute === '/'">
+            <svg cdsIcon="fade" size="16"></svg>
+            Home
+        </cds-sidenav-item>
+        <cds-sidenav-item [active]="currentRoute.startsWith('/docs')" [route]="['docs']">
+            <svg cdsIcon="course" size="16"></svg>
+            docs
+        </cds-sidenav-item>
+        <cds-sidenav-menu title="Files"  [expanded]="currentRoute.startsWith('/files')">
+            <svg cdsIcon="copy--file" size="16"></svg>
+            <cds-sidenav-item [active]="currentRoute.startsWith('/files/link1')" [route]="['files', 'link1']">link1</cds-sidenav-item>
+            <cds-sidenav-item [active]="currentRoute.startsWith('/files/support')" [route]="['files','support']">support</cds-sidenav-item>
+            <cds-sidenav-item [active]="currentRoute.startsWith('/files/catalog')" [route]="['files', 'catalog']">catalog</cds-sidenav-item>
+        </cds-sidenav-menu>
+    </cds-sidenav>
+</div>
